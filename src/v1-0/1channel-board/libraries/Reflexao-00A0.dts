@@ -1,0 +1,52 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+        compatible = "ti,beaglebone", "ti,beaglebone-black", "ti,beaglebone-green";
+
+        /* identification */
+        part-number = "Reflexao";
+        version = "00A0";
+
+        /* state the resources this cape uses */
+        exclusive-use =
+                // PRU resources used
+                "pruss",
+                "pru0",
+                // PRU Input pins
+		        "P8.16","pr1_pru0_pru_r31_14", // REFL
+                // PRU Output pins
+				"P8.11","pr1_pru0_pru_r30_15"; // CLK
+
+
+
+
+    // MUX Bit Maps:
+    // 0x40 = slow slew (0 = fast slew)
+    // 0x20 = input (0 = output)
+    // 0x10 = pullup, 0x08 = disabled (0 = pulldown)
+    // 0x01 to 0x07 = mode 1 to 7
+
+   fragment@0 {
+        target = <&am33xx_pinmux>;
+        __overlay__ {
+	 pruss_pins: pruss_pins {
+                pinctrl-single,pins = <
+                    0x038 0x36
+                    0x034 0x06
+
+                >;
+            };
+        };
+    };
+
+
+    fragment@10 {
+        target = <&pruss>;
+        __overlay__ {
+            status = "okay";  
+            pinctrl-names = "default";
+            pinctrl-0     = <&pruss_pins>; 
+        };
+    };
+};
