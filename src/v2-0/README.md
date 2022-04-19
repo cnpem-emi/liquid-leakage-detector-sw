@@ -1,28 +1,46 @@
-# Liquid Leakage Detector - SIRIUS (Remoteproc)
+# Sensor de Vazamento - SIRIUS (Remoteproc)
 
-_PRU-based Counters_
-
-Brazilian Synchrotron Light Laboratory (LNLS/CNPEM) SEI Group
-
-## What's new?
-
-This version incorporates the Remoteproc standard, utilizing it's messaging protocol instead of shared memory.
-
-This version contains:
+Esta versão incorpora o padrão Remoteproc, subistituindo o compartilhamento de memória pelo protocolo RPMsg para comunicação com as PRUs. Compatível com Debian 10.
+Contém:
 - C library
 - Python library
-- Firmware (ASM/C)
+- PRU Firmware (ASM/C)
 - Pin config script
 
-## Usage
+## Python
 
-### Installation (Python)
+### Instalação
 ```sh
 cd library/Python && python3 setup.py install
 ```
 
-### Counting (Python)
+### Uso
 ```python
 from LLDet import pulsar_prus
-pulsar_prus() # Returns distance(m) to detected leakage for both channels, 0 if no leakage detected.
+pulsar_prus() # Returna distância(m) até o vazamento, 0 se nada for detectado.
 ```
+
+## C
+```c
+#include <stdio.h>
+#include <stdint.h>
+#include "reflexao.h"
+
+int main(void)
+{
+    float distancia[2];
+    pulsar_prus(distancia);
+
+    for(int i = 0; i < 2; i++) printf("Distância canal %d: %f\n", i, distancia[i]);
+    return 0;
+}
+```
+
+## PRU firmware
+1. Instale o [PRU support package](https://git.ti.com/cgit/pru-software-support-package/pru-software-support-package/tree?h=master)
+2. Compile
+```
+make
+```
+3. Execute `config-pin.sh`
+

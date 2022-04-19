@@ -5,9 +5,7 @@
 extern "C" {
 #endif
 
-void start_PRU();
-void close_PRU();
-int8_t pulsar_PRU(float *Distance_m);
+int8_t pulsar_prus(float *Distance_m);
 
 #ifdef __cplusplus
 }

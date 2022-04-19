@@ -7,6 +7,8 @@ _Autores:_
 
 2. Carlos Scorzato ( _carlos.scorzato@lnls.br_ )
 
+3. Samuel Fraga ( _samuel.fraga@cnpem.br_ )
+
 _____
 _Breve Descrição:_
 
@@ -32,7 +34,6 @@ _____
 1. __Biblioteca de interface__
 
 Biblioteca desenvolvida para a operação do sistema, via PRU ( _Programmable Real-Time Unit_ ) da Beaglebone Black.
-Na pasta /src/libraries, executar os arquivos `library_build.sh` e `overlay_build.sh` para a instalação da biblioteca na BBB.
 
 
 

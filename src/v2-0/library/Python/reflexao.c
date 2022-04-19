@@ -32,19 +32,16 @@ static PyObject *pulsar_prus(PyObject *self, PyObject *args) {
     }
     wr_stat[0] = write(pfd[0].fd, "-", 2) == -1;
     if (wr_stat[0]) {
-        close(pfd[0].fd);
         PyErr_SetString(PyExc_IOError, "Cannot write to PRU0");
         return NULL;
     }
 
     if (pfd[1].fd < 0) {
-        close(pfd[1].fd);
         PyErr_SetString(PyExc_IOError, "Cannot communicate with PRU1");
         return NULL;
     }
     wr_stat[1] = write(pfd[1].fd, "-", 2) == -1;
     if (wr_stat[1]) {
-        close(pfd[1].fd);
         PyErr_SetString(PyExc_IOError, "Cannot write to PRU1");
         return NULL;
     }
