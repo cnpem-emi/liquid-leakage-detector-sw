@@ -1,6 +1,6 @@
 PRU_SWPKG = /usr/lib/ti/pru-software-support-package
 
-OUT = ../../../../bin
+OUT = ../../bin
 
 all: directories $(OUT)/pru0.out $(OUT)/pru1.out
 
@@ -14,6 +14,9 @@ $(OUT)/pru1.out:
 
 $(OUT)/pru0.out:
 	$(MAKE) -C PRU0
+	
+install:
+	cp $(OUT)/pru*.out /lib/firmware/
 
 clean:
 	$(MAKE) -C PRU1 clean
