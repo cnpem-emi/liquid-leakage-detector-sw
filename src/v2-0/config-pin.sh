@@ -2,8 +2,6 @@
 echo stop > /sys/class/remoteproc/remoteproc1/state
 echo stop > /sys/class/remoteproc/remoteproc2/state
 
-cp /root/liquid-leakage-detector/bin/pru*.out /lib/firmware/
-
 echo pru0.out > /sys/class/remoteproc/remoteproc1/firmware
 echo pru1.out > /sys/class/remoteproc/remoteproc2/firmware
 
